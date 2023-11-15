@@ -1,6 +1,7 @@
 import { OperatingSystem } from './../../interfaces/operating-system';
-import { Component, Input, Output, EventEmitter } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { Component, Input, Output, EventEmitter, inject } from '@angular/core';
+import { CommonModule, UpperCasePipe } from '@angular/common';
+import { OperatingSystemsService } from '../../core/operating-systems.service';
 
 @Component({
   selector: 'user-component',
@@ -14,7 +15,12 @@ export class UserComponent {
   @Output() greet: EventEmitter<string> = new EventEmitter<string>();
   username: string = "Pedro";
   doesUserExist: boolean = false;
-  operatingSystems: OperatingSystem[] = [{ id: 'Win', name: 'Windows' }, { id: 'Mac', name: 'MacOS' }, { id: 'Lin', name: 'Linux' }];
+  // operatingSystems: OperatingSystem[] = [{ id: 'Win', name: 'Windows' }, { id: 'Mac', name: 'MacOS' }, { id: 'Lin', name: 'Linux' }];
+  
+  operatingSystemService: OperatingSystemsService = inject(OperatingSystemsService)
+  operatingSystems: OperatingSystem[] = this.operatingSystemService.getOperatingSystems();
+
+
   users = [{ id: 0, name: 'Sarah' }, { id: 1, name: 'Amy' }, { id: 2, name: 'Rachel' }, { id: 3, name: 'Jessica' }, { id: 4, name: 'Poornima' }]
   isEditable: boolean = true;
   onMouseOver(osName: string): void {
