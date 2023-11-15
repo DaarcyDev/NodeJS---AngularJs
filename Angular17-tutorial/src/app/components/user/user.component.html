@@ -1,0 +1,22 @@
+<section>
+	<h1>Hello {{username}}, you are a {{occupation}}</h1>
+	@if (doesUserExist) {
+	<p>Congratulations! You Do exist =)</p>
+	}@else {
+	<p>We're sorry. but we have doubs about your existense</p>
+	}
+	<h2>He're your operatinbracketsgSystem:</h2>
+	<ul>
+		@for (os of operatingSystems; track os.id) {
+		<li (mouseover)="onMouseOver(os.name)">{{os.name}}</li>
+		}
+	</ul>
+	<h2>He're your name:</h2>
+	<ul>
+		@for (user of users; track user.id) {
+		<li>{{user.name}}</li>
+		}
+	</ul>
+	<div class="editable" [contentEditable]="isEditable"></div>
+	<button (click)="emitToParent()">Message to parent</button>
+</section>
